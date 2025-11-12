@@ -1,7 +1,8 @@
 # nf-annotflow: Comprehensive Genome Annotation and Typing Pipeline (Nextflow)
 
 **nf-annotflow** is a modular and reproducible **Nextflow pipeline** for bacterial genome annotation, antimicrobial resistance (AMR) detection, plasmid typing, and sequence typing (MLST).  
-It integrates several widely used bioinformatics tools — Bakta, AMRFinderPlus, Abricate, MobSuite, and MLST — to produce high-quality and reproducible bacterial genome annotation outputs.
+
+It accepts **assembled contigs in FASTA format** as input and integrates several widely used bioinformatics tools — Bakta, AMRFinderPlus, Abricate, MobSuite, and MLST — to produce high-quality and reproducible bacterial genome annotation outputs.
 
 ---
 
