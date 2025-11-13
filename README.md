@@ -6,7 +6,7 @@ It accepts **assembled contigs in FASTA format** as input and integrates several
 
 ---
 
-## Features
+## Pipeline summary
 
 - Annotates bacterial genomes or contigs from any assembler (e.g., from **[nf-assemflow](https://github.com/xiaoli-dong/nf-assemflow)**)
 - Performs:
@@ -22,28 +22,28 @@ It accepts **assembled contigs in FASTA format** as input and integrates several
 
 ---
 
-## Usage
+## Quick Start
 
 > [!NOTE]
 > If you are new to Nextflow and nf-core, please refer to [this page](https://nf-co.re/docs/usage/installation) on how to set-up Nextflow. Make sure to [test your setup](https://nf-co.re/docs/usage/introduction#how-to-run-a-pipeline) with `-profile test` before running the workflow on actual data.
 
-<!-- TODO nf-core: Describe the minimum required steps to execute the pipeline, e.g. how to prepare samplesheets.
-     Explain what rows and columns represent. For instance (please edit as appropriate):
+### Prepare required samplesheet input
+The nf-annotflow pipeline requires user to provide a csv format samplesheet, which contains the assembled contig files for each sample, as input. See below for what the samplesheet looks like:
 
 First, prepare a samplesheet with your input data that looks as follows:
 
 `samplesheet.csv`:
 
 ```csv
-sample,fastq_1,fastq_2
-CONTROL_REP1,AEG588A1_S1_L002_R1_001.fastq.gz,AEG588A1_S1_L002_R2_001.fastq.gz
+sample,contig_file
+157M00046,157M00046.contigs_final.fasta
+154M00027,154M00027.contigs_final.fasta
+
 ```
 
-Each row represents a fastq file (single-end) or a pair of fastq files (paired end).
+Each row represents an assembly
 
--->
-
-Now, you can run the pipeline using:
+### Run the pipeline:
 
 <!-- TODO nf-core: update the following command to include all required parameters for a minimal example -->
 
