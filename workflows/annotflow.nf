@@ -10,7 +10,7 @@ include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pi
 //
 // MODULE: nf-core modules
 //
-include { MULTIQC } from '../modules/nf-core/multiqc/main'
+include { MULTIQC } from '../modules/local/multiqc/main'
 //
 //local subworkflows
 //
@@ -32,7 +32,7 @@ workflow ANNOTFLOW {
     ch_versions = channel.empty()
     ch_multiqc_files = channel.empty()
     contigs.view()
-    
+
     ANNOTATION(contigs, params.bakta_db, params.amrfinderplus_db)
     ch_versions = ch_versions.mix(ANNOTATION.out.versions)
 

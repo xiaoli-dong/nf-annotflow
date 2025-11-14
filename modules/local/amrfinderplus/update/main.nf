@@ -2,13 +2,11 @@ process AMRFINDERPLUS_UPDATE {
     tag "update"
     label 'process_single'
 
-    conda "${moduleDir}/environment.yml"
-    // container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-    //     'https://depot.galaxyproject.org/singularity/ncbi-amrfinderplus:3.11.18--h283d18e_0':
-    //     'biocontainers/ncbi-amrfinderplus:3.11.18--h283d18e_0' }"
-     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/ncbi-amrfinderplus:3.12.8--h283d18e_0':
-        'biocontainers/ncbi-amrfinderplus:3.12.8--h283d18e_0' }"
+     conda "${moduleDir}/environment.yml"
+    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+        'https://depot.galaxyproject.org/singularity/ncbi-amrfinderplus:4.0.23--hf69ffd2_0':
+        'biocontainers/ncbi-amrfinderplus:4.0.23--hf69ffd2_0' }"
+
     output:
     path "amrfinderdb.tar.gz", emit: db
     path "versions.yml"      , emit: versions

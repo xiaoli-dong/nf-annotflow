@@ -1,8 +1,8 @@
-include { BAKTA_BAKTA } from '../../modules/nf-core/bakta/bakta/main'
-include { ABRITAMR_RUN } from '../../modules/nf-core/abritamr/run/main'
-include { MLST } from '../../modules/nf-core/mlst/main'
-include { ABRICATE_RUN as ABRICATE_RUN_VF } from '../../modules/nf-core//abricate/run/main'
-include { ABRICATE_SUMMARY as ABRICATE_SUMMARY_VF } from '../../modules/nf-core/abricate/summary/main'
+include { BAKTA_BAKTA } from '../../modules/local/bakta/bakta/main'
+include { ABRITAMR_RUN } from '../../modules/local/abritamr/run/main'
+include { MLST } from '../../modules/local/mlst/main'
+include { ABRICATE_RUN as ABRICATE_RUN_VF } from '../../modules/local//abricate/run/main'
+include { ABRICATE_SUMMARY as ABRICATE_SUMMARY_VF } from '../../modules/local/abricate/summary/main'
 include { GFF2FEATURES as GFF2FEATURES_BAKTA } from '../../modules/local/gff2features'
 include { AMRFINDERPLUS_RUN } from '../../modules/local/amrfinderplus/run/main'
 include { MOBSUITE_RECON } from '../../modules/local/mobsuite/recon/main'
@@ -13,7 +13,7 @@ include {
     CSVTK_CONCAT as CSVTK_CONCAT_CONTIG_REPORT ;
     CSVTK_CONCAT as CSVTK_CONCAT_AMR ;
     CSVTK_CONCAT as CSVTK_CONCAT_MLST
-} from '../../modules/nf-core/csvtk/concat/main'
+} from '../../modules/local/csvtk/concat/main'
 
 include { MOBSUITE_ANNOTATEPLASMID } from '../../modules/local/mobsuite/annotateplasmid'
 /*
@@ -39,6 +39,7 @@ workflow ANNOTATION {
             'tsv',
         )
     }
+    //metaerg:  metaerg --contig_file 25PS-157M00046.contigs_final.fasta  --database_dir /nfs/APL_Genomics/db/prod/metaerg --file_extension .fasta --skip_step antismash,padloc --output_dir 25PS-157M00046 --cpus 8 --force all --delimiter '|'
 
     //ARG(contigs, ffn, faa)
 
@@ -50,6 +51,14 @@ workflow ANNOTATION {
             AMRFINDERPLUS_RUN.out.report.map { cfg, amr -> amr }.collect().map { files -> tuple([id: "amr.amrfinderplus"], files) },
             'tsv',
             'tsv',
+        )
+    }
+    if (!params.skip_virulome) {
+        //virulome
+        ABRICATE_RUN_VF(contigs)
+        ch_software_versions = ch_software_versions.mix(ABRICATE_RUN_VF.out.versions)
+        ABRICATE_SUMMARY_VF(
+            ABRICATE_RUN_VF.out.report.collect { meta, report -> report }.map { report -> [[id: "virulome"], report] }
         )
     }
     if (!params.skip_mlst) {
@@ -96,14 +105,7 @@ workflow ANNOTATION {
     }
 
 
-    if (!params.skip_virulome) {
-        //virulome
-        ABRICATE_RUN_VF(contigs)
-        ch_software_versions = ch_software_versions.mix(ABRICATE_RUN_VF.out.versions)
-        ABRICATE_SUMMARY_VF(
-            ABRICATE_RUN_VF.out.report.collect { meta, report -> report }.map { report -> [[id: "virulome"], report] }
-        )
-    }
+
 
     emit:
     versions = ch_software_versions

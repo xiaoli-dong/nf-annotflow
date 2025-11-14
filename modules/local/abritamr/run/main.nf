@@ -4,8 +4,8 @@ process ABRITAMR_RUN {
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/abritamr:1.0.14--pyhdfd78af_0':
-        'biocontainers/abritamr:1.0.14--pyhdfd78af_0' }"
+        'https://depot.galaxyproject.org/singularity/abritamr:1.0.20--pyh5707d69_0':
+        'biocontainers/abritamr:abritamr:1.0.20--pyh5707d69_0' }"
 
     input:
     tuple val(meta), path(fasta)

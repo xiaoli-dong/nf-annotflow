@@ -4,4 +4,4 @@ channels:
   - bioconda
   - defaults
 dependencies:
-  - bioconda::abritamr=1.0.14
+  - bioconda::abritamr=1.0.20
