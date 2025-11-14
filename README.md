@@ -103,14 +103,8 @@ nextflow run xiaoli-dong/nf-annotflow \
 
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
-| `--bakta_db` | string | `/nfs/APL_Genomics/db/prod/bakta/v6` | Path to Bakta database |
-| `--amrfinderplus_db` | string | `/nfs/Genomics_DEV/projects/xdong/deve/pathogenseq2/db/AMRFinderPlus/latest` | Path to AMRFinderPlus database |
-
-### Generic Options
-
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `--multiqc_methods_description` | string | Custom MultiQC YAML file containing HTML with methods description |
+| `--bakta_db` | string | `/your_path_to/bakta_db` | Path to Bakta database |
+| `--amrfinderplus_db` | string | `/your_path_to/AMRFinderPlus/latest` | Path to AMRFinderPlus database |
 
 ### Help Options
 
@@ -137,9 +131,7 @@ Plasmid Typing (MOB-suite)
     ↓
 Sequence Typing (MLST)
     ↓
-Summary Reports & MultiQC
-    ↓
-Final Outputs
+Summary Reports
 ```
 
 ---
