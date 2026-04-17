@@ -35,7 +35,7 @@ workflow ANNOTFLOW {
     softwareVersionsToYAML(ch_versions)
         .collectFile(
             storeDir: "${params.outdir}/pipeline_info",
-            name: 'annotflow_software_' + 'mqc_' + 'versions.yml',
+name: 'software_versions.yml',
             sort: true,
             newLine: true,
         )
